@@ -14,28 +14,20 @@ namespace LoggingKata
 
         static void Main(string[] args)
         {
-            // Objective: Find the two Taco Bells that are the farthest apart from one another.
             logger.LogInfo("Log initialized");
 
-            // Use File.ReadAllLines(path) to grab all the lines from your csv file. 
-            // Optional: Log an error if you get 0 lines and a warning if you get 1 line
+            // Read input file and check for entries
             var lines = File.ReadAllLines(csvPath);
 
             if (lines.Length == 0) { logger.LogError("No data found in file!"); }
             if (lines.Length == 1) { logger.LogWarning("Only one entry found in data file"); }
 
-            // This will display the first item in your lines array
             logger.LogInfo($"Lines: {lines[0]}");
 
-            // Create a new instance of your TacoParser class
+            // Parse the file into locations
             var parser = new TacoParser();
-
-            // Use the Select LINQ method to parse every line in lines collection
             var locations = lines.Select(parser.Parse).ToArray();
 
-            // TODO: Create two `ITrackable` variables with initial values of `null`. 
-            // These will be used to store your two Taco Bells that are the farthest from each other.
-            // TODO: Create a `double` variable to store the distance
             ITrackable farStoreOne = null;
             ITrackable farStoreTwo = null;            
             double longestDistance = 0;
